@@ -20,13 +20,12 @@ export const goodsFromServer: string[] = [
 enum SortType {
   Alphabetically = 'alphabetically',
   Length = 'length',
+  Default = '',
 }
-
-type SortState = 'alphabetically' | 'length' | '';
 
 export const App = () => {
   let resetButton;
-  const [sortField, setSortField] = useState<SortState>('');
+  const [sortField, setSortField] = useState<SortType>(SortType.Default);
   const [isReversed, setIsReversed] = useState(false);
 
   function toggleReverse() {
@@ -39,7 +38,7 @@ export const App = () => {
         type="button"
         className="button is-danger is-light"
         onClick={() => {
-          setSortField('');
+          setSortField(SortType.Default);
           setIsReversed(false);
         }}
       >
@@ -72,16 +71,16 @@ export const App = () => {
       <div className="buttons">
         <button
           type="button"
-          className={`button is-info ${sortField === 'alphabetically' ? '' : 'is-light'}`}
-          onClick={() => setSortField('alphabetically')}
+          className={`button is-info ${sortField === SortType.Alphabetically ? '' : 'is-light'}`}
+          onClick={() => setSortField(SortType.Alphabetically)}
         >
           Sort alphabetically
         </button>
 
         <button
           type="button"
-          className={`button is-success ${sortField === 'length' ? '' : 'is-light'}`}
-          onClick={() => setSortField('length')}
+          className={`button is-success ${sortField === SortType.Length ? '' : 'is-light'}`}
+          onClick={() => setSortField(SortType.Length)}
         >
           Sort by length
         </button>
